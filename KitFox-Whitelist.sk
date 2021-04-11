@@ -1,0 +1,8 @@
+#依赖:
+#KitFox-CORE
+#Skript
+Options:
+    #是否使用SK白名单?
+    UseSkWhitelist: false
+
+command /skwl [<text>] [<text>]:
