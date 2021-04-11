@@ -9,10 +9,23 @@ Options:
     
 
 
-function FOX_WHITELIST_PLAYER(type: text, groupcode: text, peoplecode: text, content: text):
-  set {_silent} to FOX_getConfigValue("silent-mode")
-  set {_argument::*} to {_content} split by " " # 指令分割
-  if {@UseSkWhitelist} is false:
+function FOX_WHITELIST_PLAYER_ADD(type: text, groupcode: text, peoplecode: text, content: text):
+    set {_silent} to FOX_getConfigValue("silent-mode")
+    
+    if {@UseSkWhitelist} is false:
+        set {_command} to "whitelist"
+    else:
+        set {_command} to "skwl"
+    if {SK_Whitelist_QQ::*} contains {_peoplecode}:  # 如果玩家已申请白名单
+        command "%{_command}% remove %{SK_Whitelist_QQ::%{_peoplecode}%::id}%"
+        command "%{_command}% add %{_content}%"
+        set {SK_Whitelist_QQ::%{_peoplecode}%::id} to {_content}
+    else:
+        command "%{_command}% add %{_content}%"
+        set {SK_Whitelist_QQ::%{_peoplecode}%::id} to {_content}
+
+
+
     
 
 
