@@ -4,10 +4,16 @@
 Options:
     #---是否使用SK白名单?
     #SK只识别游戏名 命令/skwl 权限节点: skwhitelist.op
-    #如果为false则使用原版白名单
+    #如果为false则使用/whitelist
     UseSkWhitelist: false
     
 
+
+function FOX_WHITELIST_PLAYER(type: text, groupcode: text, peoplecode: text, content: text):
+  set {_silent} to FOX_getConfigValue("silent-mode")
+  set {_argument::*} to {_content} split by " " # 指令分割
+  if {@UseSkWhitelist} is false:
+    
 
 
 command /skwl [<text>] [<text>]:
