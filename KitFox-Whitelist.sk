@@ -7,7 +7,10 @@ Options:
     #如果为false则使用/whitelist
     UseSkWhitelist: false
     
-
+on load:
+    set {_groupid} to FOX_getConfigValue("main-group")
+    set {_groupid} to {_groupid} parsed as number
+    set {_qqlist} to members list of group {_groupid} of {_botid} bot
 
 function FOX_WHITELIST_PLAYER_ADD(type: text, groupcode: text, peoplecode: text, content: text):
     set {_silent} to FOX_getConfigValue("silent-mode")
@@ -23,6 +26,7 @@ function FOX_WHITELIST_PLAYER_ADD(type: text, groupcode: text, peoplecode: text,
     else:
         command "%{_command}% add %{_content}%"
         set {SK_Whitelist_QQ::%{_peoplecode}%::id} to {_content}
+
 
 
 
