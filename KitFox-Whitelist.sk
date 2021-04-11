@@ -2,7 +2,41 @@
 #KitFox-CORE
 #Skript
 Options:
-    #是否使用SK白名单?
+    #---是否使用SK白名单?
+    #SK只识别游戏名 命令/skwl 权限节点: skwhitelist.op
+    #如果为false则使用原版白名单
     UseSkWhitelist: false
+    
+
+
 
 command /skwl [<text>] [<text>]:
+    permission: "skwhitelist.op"
+    trigger:
+        if arg-1 is "add":
+            if arg-2 is set:
+                if {SK_Whitelist::*} contains arg-2:
+                    send "这个玩家已经在白名单里了"
+                else:
+                    add arg-2 to {SK_Whitelist::*}
+                    send "已加玩家加入白名单"
+            else:
+                send "/skwl add <player>"
+        else if arg-1 is "remove":
+            if arg-2 is set:
+                if {SK_Whitelist::*} contains arg-2:
+                    send "已删除"
+                    remove arg-2 from {SK_Whitelist::*}
+                else:
+                
+                    send "玩家不存在"
+            else:
+                send "/skwl remove <player>"
+        else if arg-1 is "list":
+            loop {SK_Whitelist::*}:
+                send loop-value
+        else:
+            send "/skwl list"
+            send "/skwl remove"
+            send "/skwl add"
+    
